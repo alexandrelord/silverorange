@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IRepo } from '../../types/Repos';
-// import styles from './Repos.module.css';
+import styles from './Repos.module.css';
 
 export function Repos() {
   const [repos, setRepos] = useState<IRepo[]>([]);
@@ -45,7 +45,7 @@ export function Repos() {
 
   function renderReposTable() {
     return (
-      <table>
+      <table className={styles.reposTbl}>
         <thead>
           <tr>
             <th>Name</th>
@@ -89,7 +89,7 @@ export function Repos() {
     });
 
     return (
-      <div>
+      <div className={styles.btnContainer}>
         {languages.map((lang, id) => (
           <button
             key={id}
@@ -106,7 +106,7 @@ export function Repos() {
   }
 
   return (
-    <section>
+    <section className={styles.container}>
       <h1>Repos</h1>
       {loading ? (
         <p>Loading...</p>

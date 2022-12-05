@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+.reposTbl td:last-child {
+    text-align: center;
+}
+
+.reposTbl tr:hover {
+    background-color: rgb(218, 165, 32, 0.5);
+    cursor: pointer;
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
