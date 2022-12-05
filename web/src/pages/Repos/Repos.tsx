@@ -50,6 +50,8 @@ export function Repos() {
             },
           },
         });
+      } else {
+        alert('No commits found');
       }
     };
     fetchCommits();
