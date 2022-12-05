@@ -29,7 +29,7 @@ export function Repos() {
     fetchRepos();
   }, []);
 
-  async function handleClick(id: number, url: string) {
+  async function handleRepoClick(id: number, url: string) {
     const commitsUrl = url.replace('{/sha}', '');
 
     const fetchCommits = async () => {
@@ -73,7 +73,7 @@ export function Repos() {
             repos.map((repo) => (
               <tr
                 key={repo.id}
-                onClick={() => handleClick(repo.id, repo.commits_url)}
+                onClick={() => handleRepoClick(repo.id, repo.commits_url)}
               >
                 <td>{repo.name}</td>
                 <td>{repo.description}</td>
@@ -87,7 +87,7 @@ export function Repos() {
               .map((repo) => (
                 <tr
                   key={repo.id}
-                  onClick={() => handleClick(repo.id, repo.commits_url)}
+                  onClick={() => handleRepoClick(repo.id, repo.commits_url)}
                 >
                   <td>{repo.name}</td>
                   <td>{repo.description}</td>
