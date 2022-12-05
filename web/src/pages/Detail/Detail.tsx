@@ -17,8 +17,10 @@ export function Detail() {
       if (response.ok) {
         const data = await response.text();
         setReadme(data);
-        setLoading(false);
+      } else {
+        setReadme('No README found');
       }
+      setLoading(false);
     };
     fetchReadme();
   }, [state.repo.full_name]);
