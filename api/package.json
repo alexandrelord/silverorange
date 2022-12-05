@@ -14,7 +14,8 @@
     "cors": "^2.8.5",
     "debug": "^4.3.3",
     "dotenv-flow": "^3.2.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "node-fetch-commonjs": "^3.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
