@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import styles from './Detail.module.css';
 
 export function Detail() {
@@ -46,10 +47,21 @@ export function Detail() {
     );
   }
 
+  function renderReadme() {
+    return (
+      <div className={styles.readme}>
+        <h1>Readme</h1>
+        <div>
+          <ReactMarkdown className={styles.markdown}>{readme}</ReactMarkdown>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section>
       {renderLatestCommit()}
-      {loading ? <p>Loading...</p> : readme}
+      {loading ? <p>Loading...</p> : renderReadme()}
       <Link to="/">
         <button>Back</button>
       </Link>
