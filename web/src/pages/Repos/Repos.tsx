@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { IRepo } from '../../types/Repos';
+import { useNavigate } from 'react-router-dom';
 import styles from './Repos.module.css';
 
 export function Repos() {
   const [repos, setRepos] = useState<IRepo[]>([]);
   const [language, setLanguage] = useState('All');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -27,7 +29,7 @@ export function Repos() {
     fetchRepos();
   }, []);
 
-  async function handleClick(url: string) {
+  async function handleClick(id: number, url: string) {
     const commitsUrl = url.replace('{/sha}', '');
 
     const fetchCommits = async () => {
@@ -37,7 +39,17 @@ export function Repos() {
         const author = result[0].commit.author.name;
         const message = result[0].commit.message;
         const date = result[0].commit.author.date;
-        console.log(author, message, date);
+
+        navigate(`/detail/${id}`, {
+          state: {
+            repo: repos.find((repo) => repo.id === id),
+            latestCommit: {
+              author,
+              message,
+              date,
+            },
+          },
+        });
       }
     };
     fetchCommits();
@@ -57,7 +69,10 @@ export function Repos() {
         <tbody>
           {language === 'All' &&
             repos.map((repo) => (
-              <tr key={repo.id} onClick={() => handleClick(repo.commits_url)}>
+              <tr
+                key={repo.id}
+                onClick={() => handleClick(repo.id, repo.commits_url)}
+              >
                 <td>{repo.name}</td>
                 <td>{repo.description}</td>
                 <td>{repo.language}</td>
@@ -68,7 +83,10 @@ export function Repos() {
             repos
               .filter((repo) => repo.language === language)
               .map((repo) => (
-                <tr key={repo.id} onClick={() => handleClick(repo.commits_url)}>
+                <tr
+                  key={repo.id}
+                  onClick={() => handleClick(repo.id, repo.commits_url)}
+                >
                   <td>{repo.name}</td>
                   <td>{repo.description}</td>
                   <td>{repo.language}</td>
